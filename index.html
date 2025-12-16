@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python for AI/ML Roadmap - Zero to Expert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .mission-statement {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #7e22ce;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-bar h3 {
+            margin-bottom: 15px;
+            color: #7e22ce;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1e3c72 0%, #7e22ce 100%);
+            width: 0%;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .milestones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .milestone-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .milestone-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .milestone-card.dsa {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .milestone-card.ml {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .milestone-card.locked {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            opacity: 0.7;
+        }
+
+        .milestone-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .milestone-card p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1em;
+        }
+
+        .milestone-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .levels {
+            display: grid;
+            gap: 30px;
+        }
+
+        .level {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .level:hover {
+            transform: translateX(5px);
+        }
+
+        .level-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-header.milestone-level {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border: 3px solid #fff;
+        }
+
+        .level-header h2 {
+            font-size: 1.5em;
+        }
+
+        .level-badge {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .level-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .level-content.active {
+            padding: 20px;
+            max-height: 3000px;
+        }
+
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .topic {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #7e22ce;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .topic:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .topic.completed {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .topic input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+
+        .project-section {
+            background: linear-gradient(135deg, rgba(126, 34, 206, 0.1) 0%, rgba(30, 60, 114, 0.1) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid rgba(126, 34, 206, 0.3);
+        }
+
+        .project-section h3 {
+            margin-bottom: 10px;
+            color: #7e22ce;
+        }
+
+        .project-section ul {
+            list-style-position: inside;
+            color: #333;
+        }
+
+        .alert-section {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: bold;
+            border: 3px solid #fff;
+        }
+
+        .alert-section.dsa {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .alert-section.ml {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .resources {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .resources h2 {
+            color: #7e22ce;
+            margin-bottom: 20px;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .resource-link {
+            background: linear-gradient(135deg, #1e3c72 0%, #7e22ce 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.3s;
+            display: block;
+        }
+
+        .resource-link:hover {
+            transform: scale(1.05);
+        }
+
+        .resource-category {
+            margin-bottom: 30px;
+        }
+
+        .resource-category h3 {
+            color: #7e22ce;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.active {
+            transform: rotate(180deg);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .timeline-note {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline-note h3 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Python for AI/ML Roadmap</h1>
+            <p>Complete Journey from Zero to Machine Learning Expert</p>
+            <div class="mission-statement">
+                <h3>🎯 Your Mission: Master Python for AI & Machine Learning</h3>
+                <p>This roadmap is specifically designed to prepare you for AI and Machine Learning. Every topic is carefully selected to build the foundation you need.</p>
+            </div>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="number" id="totalTopics">180+</div>
+                <div class="label">Topics to Master</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="completedTopics">0</div>
+                <div class="label">Topics Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">16</div>
+                <div class="label">Learning Phases</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="progressPercent">0%</div>
+                <div class="label">Overall Progress</div>
+            </div>
+        </div>
+
+        <div class="timeline-note">
+            <h3>⏱️ Estimated Timeline</h3>
+            <p><strong>Intensive Learning:</strong> 6-9 months (4-6 hours/day)</p>
+            <p><strong>Casual Learning:</strong> 12-18 months (2-3 hours/day)</p>
+            <p><strong>Start DSA:</strong> After Level 5 (35-40% complete)</p>
+            <p><strong>Start ML:</strong> After Level 10 (65-70% complete)</p>
+        </div>
+
+        <div class="progress-bar">
+            <h3>Your Learning Progress</h3>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+        </div>
+
+        <div class="milestones">
+            <div class="milestone-card locked" id="milestone-dsa">
+                <div class="milestone-icon">🔒</div>
+                <h3>DSA Ready!</h3>
+                <p>Complete 35-40% to unlock Data Structures & Algorithms track</p>
+            </div>
+            <div class="milestone-card ml locked" id="milestone-ml">
+                <div class="milestone-icon">🔒</div>
+                <h3>ML Ready!</h3>
+                <p>Complete 65-70% to start Machine Learning alongside Python</p>
+            </div>
+            <div class="milestone-card locked" id="milestone-complete">
+                <div class="milestone-icon">🔒</div>
+                <h3>AI/ML Expert!</h3>
+                <p>Complete 100% - You're ready for advanced AI projects!</p>
+            </div>
+        </div>
+
+        <div class="levels" id="levelsContainer"></div>
+
+        <div class="resources">
+            <h2>📚 Learning Resources</h2>
+            
+            <div class="resource-category">
+                <h3>Python Fundamentals</h3>
+                <div class="resource-grid">
+                    <a href="https://docs.python.org/3/" target="_blank" class="resource-link">Official Python Docs</a>
+                    <a href="https://www.learnpython.org/" target="_blank" class="resource-link">LearnPython.org</a>
+                    <a href="https://realpython.com/" target="_blank" class="resource-link">Real Python</a>
+                    <a href="https://www.programiz.com/python-programming" target="_blank" class="resource-link">Programiz Python</a>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>NumPy & Pandas</h3>
+                <div class="resource-grid">
+                    <a href="https://numpy.org/doc/" target="_blank" class="resource-link">NumPy Documentation</a>
+                    <a href="https://pandas.pydata.org/docs/" target="_blank" class="resource-link">Pandas Documentation</a>
+                    <a href="https://www.kaggle.com/learn" target="_blank" class="resource-link">Kaggle Learn</a>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>Machine Learning (Start After 65%)</h3>
+                <div class="resource-grid">
+                    <a href="https://www.coursera.org/learn/machine-learning" target="_blank" class="resource-link">Andrew Ng ML Course</a>
+                    <a href="https://scikit-learn.org/stable/" target="_blank" class="resource-link">Scikit-learn Docs</a>
+                    <a href="https://www.tensorflow.org/tutorials" target="_blank" class="resource-link">TensorFlow Tutorials</a>
+                    <a href="https://pytorch.org/tutorials/" target="_blank" class="resource-link">PyTorch Tutorials</a>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>DSA Practice (Start After 35%)</h3>
+                <div class="resource-grid">
+                    <a href="https://leetcode.com/" target="_blank" class="resource-link">LeetCode</a>
+                    <a href="https://www.hackerrank.com/domains/python" target="_blank" class="resource-link">HackerRank</a>
+                    <a href="https://www.codewars.com/" target="_blank" class="resource-link">Codewars</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🎯 Focus on building projects at each level - practical experience is key!</p>
+            <p>💪 Stay consistent, practice daily, and you'll be ML-ready in no time!</p>
+            <p>Your progress is automatically saved in your browser.</p>
+        </footer>
+    </div>
+
+    <script>
+        const roadmapData = {
+            0: {
+                title: '🌱 Level 0: Programming Foundations',
+                badge: '0-5%',
+                topics: ['What is Programming', 'How Python Works', 'Installing Python & IDE', 'Python REPL', 'Writing First Program', 'Comments & Documentation', 'Variables & Memory', 'PEP 8 Style Guide']
+            },
+            1: {
+                title: '🎯 Level 1: Python Basics',
+                badge: '5-12%',
+                topics: ['Variables & Constants', 'Data Types (int, float, str, bool)', 'Type Conversion', 'Input/Output Functions', 'Basic Operators', 'String Basics', 'Print Formatting', 'Escape Characters', 'Basic Math Operations', 'Comments Best Practices'],
+                projects: ['Simple Calculator', 'Number Guessing Game', 'Temperature Converter']
+            },
+            2: {
+                title: '🔄 Level 2: Control Flow & Functions',
+                badge: '12-20%',
+                topics: ['If/Elif/Else Statements', 'Comparison Operators', 'Logical Operators (and, or, not)', 'Nested Conditionals', 'For Loops', 'While Loops', 'Break & Continue', 'Pass Statement', 'Range Function', 'Nested Loops', 'Function Basics', 'Parameters & Arguments', 'Return Statement', 'Default Arguments', 'Keyword Arguments', '*args & **kwargs'],
+                projects: ['To-Do List Application', 'Rock Paper Scissors Game', 'Password Generator']
+            },
+            3: {
+                title: '📦 Level 3: Data Structures (Lists, Tuples, Sets)',
+                badge: '20-28%',
+                topics: ['List Creation & Indexing', 'List Methods (append, extend, insert)', 'List Slicing', 'List Comprehension', 'Tuples Basics', 'Tuple Operations', 'Sets Basics', 'Set Operations', 'Set Methods', 'Frozensets']
+            },
+            4: {
+                title: '🗂️ Level 4: Dictionaries & String Manipulation',
+                badge: '28-35%',
+                topics: ['Dictionary Creation', 'Dictionary Methods', 'Dictionary Comprehension', 'Nested Dictionaries', 'String Methods', 'String Formatting (f-strings)', 'String Slicing', 'String Operations', 'Regular Expressions (Regex)', 'Pattern Matching'],
+                projects: ['Contact Book', 'Word Counter', 'Simple Encryption Tool']
+            },
+            5: {
+                title: '🎓 Level 5: File Handling & Modules',
+                badge: '35-42%',
+                topics: ['Opening & Closing Files', 'Reading Files', 'Writing Files', 'File Modes', 'With Statement', 'CSV File Handling', 'JSON File Handling', 'Import Statement', 'Creating Modules', 'Standard Library Modules', 'pip & Package Installation', 'Virtual Environments', '__name__ == "__main__"'],
+                projects: ['CSV Data Analyzer', 'Log File Parser', 'Simple Database (JSON)'],
+                milestone: true,
+                milestoneType: 'dsa',
+                milestoneTitle: '✅ You\'re Ready to Start DSA (Data Structures & Algorithms)!',
+                milestoneText: 'You now have solid Python foundations. You can start learning DSA alongside continuing this roadmap! Recommended: Spend 40% time on DSA, 60% on continuing this roadmap.'
+            },
+            6: {
+                title: '🏗️ Level 6: Object-Oriented Programming (OOP)',
+                badge: '42-50%',
+                topics: ['Classes & Objects', 'Constructors (__init__)', 'Instance Variables', 'Class Variables', 'Methods', 'self Parameter', 'Encapsulation', 'Inheritance', 'Polymorphism', 'Method Overriding', 'super() Function', 'Abstract Classes', 'Magic/Dunder Methods', '__str__ & __repr__', 'Property Decorators'],
+                projects: ['Library Management System', 'Banking System', 'Student Grade Manager']
+            },
+            7: {
+                title: '⚠️ Level 7: Error Handling & Debugging',
+                badge: '50-55%',
+                topics: ['Try/Except Blocks', 'Multiple Except Blocks', 'Else & Finally', 'Raising Exceptions', 'Custom Exceptions', 'Exception Hierarchy', 'Assertions', 'Debugging with print()', 'Python Debugger (pdb)', 'Logging Module']
+            },
+            8: {
+                title: '🔧 Level 8: Advanced Python Concepts',
+                badge: '55-62%',
+                topics: ['Lambda Functions', 'Map, Filter, Reduce', 'Decorators', 'Generators', 'Yield Statement', 'Iterators', '__iter__ & __next__', 'Context Managers', 'Closures', 'Recursion', 'Memoization', 'Type Hints', 'Collections Module (Counter, defaultdict)', 'itertools Module', 'functools Module']
+            },
+            9: {
+                title: '📊 Level 9: NumPy Fundamentals',
+                badge: '62-68%',
+                topics: ['NumPy Installation', 'NumPy Arrays', 'Array Creation Methods', 'Array Indexing & Slicing', 'Array Shape & Reshape', 'Array Operations', 'Broadcasting', 'Mathematical Functions', 'Statistical Functions', 'Linear Algebra', 'Random Number Generation', 'Array Manipulation', 'Boolean Indexing'],
+                projects: ['Matrix Calculator', 'Statistical Analysis Tool', 'Image Processing Basics']
+            },
+            10: {
+                title: '📈 Level 10: Pandas for Data Analysis',
+                badge: '68-75%',
+                topics: ['Pandas Installation', 'Series & DataFrame', 'Reading Data (CSV, Excel)', 'DataFrame Basics', 'Selecting Data (loc, iloc)', 'Filtering Data', 'Sorting Data', 'GroupBy Operations', 'Merging & Joining', 'Handling Missing Data', 'Data Cleaning', 'Data Transformation', 'Apply Functions', 'Pivot Tables', 'Time Series Data'],
+                projects: ['Sales Data Analyzer', 'COVID-19 Data Dashboard', 'Stock Price Analyzer'],
+                milestone: true,
+                milestoneType: 'ml',
+                milestoneTitle: '✅ You\'re Ready to Start Machine Learning!',
+                milestoneText: 'You now have all the Python fundamentals needed for ML! Start learning ML concepts alongside completing this roadmap. Recommended Split: 50% ML Learning, 30% Python Practice, 20% DSA'
+            },
+            11: {
+                title: '📉 Level 11: Data Visualization (Matplotlib & Seaborn)',
+                badge: '75-82%',
+                topics: ['Matplotlib Basics', 'Line Plots', 'Scatter Plots', 'Bar Charts', 'Histograms', 'Pie Charts', 'Subplots', 'Customizing Plots', 'Seaborn Installation', 'Seaborn Basics', 'Distribution Plots', 'Categorical Plots', 'Heatmaps', 'Pair Plots', 'Styling & Themes'],
+                projects: ['Interactive Data Dashboard', 'Weather Data Visualizer', 'Financial Charts Tool']
+            },
+            12: {
+                title: '🌐 Level 12: Web Scraping & APIs',
+                badge: '82-88%',
+                topics: ['HTTP Basics', 'Requests Library', 'GET & POST Requests', 'API Authentication', 'JSON Handling', 'BeautifulSoup Basics', 'HTML Parsing', 'CSS Selectors', 'Selenium Basics', 'Web Automation', 'Handling Dynamic Content', 'Rate Limiting & Ethics'],
+                projects: ['Web Scraper for Job Listings', 'News Aggregator', 'Price Tracker Bot']
+            },
+            13: {
+                title: '🗄️ Level 13: Database & SQL Integration',
+                badge: '88-93%',
+                topics: ['SQL Basics', 'SQLite in Python', 'Creating Tables', 'INSERT, SELECT, UPDATE, DELETE', 'WHERE Clauses', 'JOINs', 'SQLAlchemy Basics', 'ORM Concepts', 'Database Connection', 'Transactions', 'Database Migration'],
+                projects: ['Inventory Management System', 'User Authentication System', 'E-commerce Backend']
+            },
+            14: {
+                title: '🧪 Level 14: Testing & Best Practices',
+                badge: '93-97%',
+                topics: ['Unit Testing Basics', 'unittest Module', 'pytest Basics', 'Test Cases', 'Assertions', 'Test Coverage', 'Mocking', 'Code Documentation', 'Docstrings', 'Type Checking', 'Code Profiling', 'Performance Optimization', 'Memory Management', 'PEP Standards']
+            },
+            15: {
+                title: '🚀 Level 15: ML-Ready Advanced Topics',
+                badge: '97-100%',
+                topics: ['Multiprocessing', 'Multithreading', 'Asyncio Basics', 'Async/Await', 'Concurrent Futures', 'Performance Tuning', 'Memory Profiling', 'Cython Basics', 'C Extensions', 'Packaging Projects', 'PyPI Publishing', 'Virtual Environment Management', 'Git Version Control', 'Project Structure', 'ML Pipeline Basics'],
+                projects: ['Custom ML Pipeline', 'Data Processing Framework', 'ML Model Deployment System', 'Real-time Prediction API'],
+                milestone: true,
+                milestoneType: 'complete',
+                milestoneTitle: 'You\'re Now a Python Expert Ready for Advanced AI/ML!',
+                milestoneText: 'You have mastered all Python fundamentals needed for AI and Machine Learning! Next Steps: Deep Learning, Neural Networks, NLP, Computer Vision, MLOps'
+            }
+        };
+
+        function initializeRoadmap() {
+            const c = document.getElementById('levelsContainer');
+            
+            Object.keys(roadmapData).forEach(n => {
+                const d = roadmapData[n];
+                const l = document.createElement('div');
+                l.className = 'level';
+                
+                const h = d.milestone ? 'level-header milestone-level' : 'level-header';
+                
+                l.innerHTML = `
+                    <div class="${h}" onclick="toggleLevel(${n})">
+                        <h2>${d.title}</h2>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span class="level-badge">${d.badge}</span>
+                            <span class="toggle-icon" id="toggle-${n}">▼</span>
+                        </div>
+                    </div>
+                    <div class="level-content" id="content-${n}">
+                        ${d.milestone ? `
+                            <div class="alert-section ${d.milestoneType}">
+                                <div style="font-size: 2em; text-align: center; margin-bottom: 10px;">🎉 MILESTONE UNLOCKED! 🎉</div>
+                                <h3>${d.milestoneTitle}</h3>
+                                <p style="margin-top: 10px;">${d.milestoneText}</p>
+                            </div>
+                        ` : ''}
+                        <div class="topics" id="topics-${n}"></div>
+                        ${d.projects ? `
+                            <div class="project-section">
+                                <h3>💡 Practice Projects:</h3>
+                                <ul>
+                                    ${d.projects.map(p => `<li>${p}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                c.appendChild(l);
+                
+                const tc = document.getElementById(`topics-${n}`);
+                d.topics.forEach((t, i) => {
+                    const id = `topic-${n}-${i}`;
+                    const ic = localStorage.getItem(id) === 'true';
+                    
+                    const td = document.createElement('div');
+                    td.className = `topic ${ic ? 'completed' : ''}`;
+                    td.innerHTML = `
+                        <input type="checkbox" id="${id}" ${ic ? 'checked' : ''} onchange="toggleTopic('${id}')">
+                        <label for="${id}">${t}</label>
+                    `;
+                    tc.appendChild(td);
+                });
+            });
+            
+            updateProgress();
+        }
+
+        function toggleLevel(l) {
+            const ct = document.getElementById(`content-${l}`);
+            const tg = document.getElementById(`toggle-${l}`);
+            ct.classList.toggle('active');
+            tg.classList.toggle('active');
+        }
+
+        function toggleTopic(id) {
+            const cb = document.getElementById(id);
+            const td = cb.parentElement;
+            
+            if (cb.checked) {
+                localStorage.setItem(id, 'true');
+                td.classList.add('completed');
+            } else {
+                localStorage.removeItem(id);
+                td.classList.remove('completed');
+            }
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let tt = 0;
+            let ct = 0;
+            
+            Object.keys(roadmapData).forEach(n => {
+                roadmapData[n].topics.forEach((t, i) => {
+                    tt++;
+                    const id = `topic-${n}-${i}`;
+                    if (localStorage.getItem(id) === 'true') {
+                        ct++;
+                    }
+                });
+            });
+            
+            const p = Math.round((ct / tt) * 100);
+            
+            document.getElementById('totalTopics').textContent = tt;
+            document.getElementById('completedTopics').textContent = ct;
+            document.getElementById('progressPercent').textContent = p + '%';
+            document.getElementById('progressFill').style.width = p + '%';
+            document.getElementById('progressFill').textContent = p + '%';
+            
+            const dm = document.getElementById('milestone-dsa');
+            const mm = document.getElementById('milestone-ml');
+            const cm = document.getElementById('milestone-complete');
+            
+            if (p >= 35) {
+                dm.classList.remove('locked');
+                dm.classList.add('dsa');
+                dm.innerHTML = `
+                    <div class="milestone-icon">🎉</div>
+                    <h3>DSA Ready!</h3>
+                    <p>Unlocked! Start Data Structures & Algorithms now!</p>
+                `;
+            }
+            
+            if (p >= 65) {
+                mm.classList.remove('locked');
+                mm.classList.remove('ml');
+                mm.classList.add('ml');
+                mm.innerHTML = `
+                    <div class="milestone-icon">🚀</div>
+                    <h3>ML Ready!</h3>
+                    <p>Unlocked! Start Machine Learning now!</p>
+                `;
+            }
+            
+            if (p >= 100) {
+                cm.classList.remove('locked');
+                cm.innerHTML = `
+                    <div class="milestone-icon">🏆</div>
+                    <h3>AI/ML Expert!</h3>
+                    <p>Congratulations! You're ready for advanced AI!</p>
+                `;
+            }
+        }
+
+        initializeRoadmap();
+    </script>
+</body>
+</html>
